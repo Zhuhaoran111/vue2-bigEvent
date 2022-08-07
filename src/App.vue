@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <!--一级路由的挂载点 -->
-    <router-view></router-view>
-  </div>
+  <!--一级路由的挂载点 -->
+  <router-view></router-view>
 </template>
 <script>
 export default {};

@@ -6,6 +6,11 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
+  //默认打开显示登陆页面
+  {
+    path:'/',
+    component:()=>import('@/views/layout')
+  },
     {
       path:'/reg',
       component:()=>import('@/views/register')
