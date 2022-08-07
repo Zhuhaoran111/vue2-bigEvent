@@ -1,7 +1,11 @@
 <template>
-  <div id="app">
-    <el-button type="primary">主要按钮</el-button>
+  <div>
+    <!--一级路由的挂载点 -->
+    <router-view></router-view>
   </div>
 </template>
+<script>
+export default {};
+</script>
 
 <style lang="less" scoped></style>

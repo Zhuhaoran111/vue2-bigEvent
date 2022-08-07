@@ -6,7 +6,7 @@ import store from './store'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 //引入去全局的样式
-import '@/assets/css/index.less'
+import '@/assets/css/index.less';
 //使用组件库
 Vue.use(ElementUI);
 Vue.config.productionTip = false
