@@ -7,10 +7,11 @@ export const getUserinfo=()=>{
     return require({
         url:'/my/userinfo',
         //传参够后台：params(查询字符串query),data(请求体body),header(请求头)
-        headers:{
-            //this.$store.state.token,这里不时组件对象，不能通过this.$store拿到store对象
-            //直接用引入的信息
-            Authorization:store.state.token
-        }
+        //已经定义了请求拦截器，就不需要写了
+        // headers:{
+        //     //this.$store.state.token,这里不时组件对象，不能通过this.$store拿到store对象
+        //     //直接用引入的信息
+        //     Authorization:store.state.token
+        // }
     })
 }
