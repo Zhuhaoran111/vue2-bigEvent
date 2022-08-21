@@ -9,22 +9,14 @@
       <el-form :model="loginForm" :rules="loginRules" ref="loginRef">
         <!-- 用户名 -->
         <el-form-item prop="username">
-          <el-input
-            v-model="loginForm.username"
-            placeholder="请输入用户名"
-          ></el-input>
+          <el-input v-model="loginForm.username" placeholder="请输入用户名"></el-input>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
-          <el-input
-            v-model="loginForm.password"
-            placeholder="请输入密码"
-          ></el-input>
+          <el-input v-model="loginForm.password" placeholder="请输入密码"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" class="btn-login" @click="loginFn"
-            >登录</el-button
-          >
+          <el-button type="primary" class="btn-login" @click="loginFn">登录</el-button>
           <!-- @click="$router.push('/reg')" 跳转到注册页面 -->
           <el-link type="info" @click="$router.push('/reg')">去注册</el-link>
         </el-form-item>
@@ -77,6 +69,7 @@ export default {
           //发起登录登录接口
           //解构赋值就是为了把后台真正的书籍赋值给了res
           const { data: res } = await loginApi(this.loginForm);
+          console.log(res)
           //根据后台返回的登陆信息做提示，
           if (res.code !== 0) return this.$message.error(res.message);
           //登陆成功提示

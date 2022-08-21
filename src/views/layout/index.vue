@@ -5,32 +5,19 @@
       <!-- 左侧的 logo -->
       <img src="../../assets/images/logo.png" alt="" />
       <!-- 右侧的菜单 -->
-      <el-menu
-        class="el-menu-top"
-        mode="horizontal"
-        background-color="#23262E"
-        text-color="#fff"
-        active-text-color="#409EFF"
-      >
+      <el-menu class="el-menu-top" mode="horizontal" background-color="#23262E" text-color="#fff"
+        active-text-color="#409EFF">
         <el-submenu index="1">
           <template slot="title">
             <!-- 头像 -->
             <img src="../../assets/images/logo.png" alt="" class="avatar" />
             <span>个人中心</span>
           </template>
-          <el-menu-item index="1-1"
-            ><i class="el-icon-s-operation"></i>基本资料</el-menu-item
-          >
-          <el-menu-item index="1-2"
-            ><i class="el-icon-camera"></i>更换头像</el-menu-item
-          >
-          <el-menu-item index="1-3"
-            ><i class="el-icon-key"></i>重置密码</el-menu-item
-          >
+          <el-menu-item index="1-1"><i class="el-icon-s-operation"></i>基本资料</el-menu-item>
+          <el-menu-item index="1-2"><i class="el-icon-camera"></i>更换头像</el-menu-item>
+          <el-menu-item index="1-3"><i class="el-icon-key"></i>重置密码</el-menu-item>
         </el-submenu>
-        <el-menu-item index="2" @click="quitFn"
-          ><i class="el-icon-switch-button"></i>退出</el-menu-item
-        >
+        <el-menu-item index="2" @click="quitFn"><i class="el-icon-switch-button"></i>退出</el-menu-item>
       </el-menu>
     </el-header>
 
@@ -44,18 +31,9 @@
           <img src="../../assets/images/sample.jpg" alt="" v-else />
           <span>欢迎 {{ nickname || username }}</span>
         </div>
-        <!-- 2.这是侧边导航栏 -->
-        <el-menu
-          default-active="/home"
-          class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
-          background-color="transparent"
-          text-color="#fff"
-          active-text-color="#ffd04b"
-          unique-opened
-          router
-        >
+        <!-- 2.这是侧边导航栏  :default-active="$route.path"刷新时侧边栏不高亮的问题-->
+        <el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
+          background-color="transparent" text-color="#fff" active-text-color="#ffd04b" unique-opened router>
           <!-- 
            unique-opened:默认只能打开一个菜单
            router,点击某行菜单，index作为路由值切换
@@ -67,11 +45,7 @@
           -->
           <template v-for="item in menus">
             <!-- 你没有孩子首页就用这个 ,这里index前面不加：就是字符串item.indexPath，加了：就是变量就是indexPath的值-->
-            <el-menu-item
-              v-if="!item.children"
-              :index="item.indexPath"
-              :key="item.indexPath"
-            >
+            <el-menu-item v-if="!item.children" :index="item.indexPath" :key="item.indexPath">
               <i :class="item.icon"></i>
               <span slot="title">{{ item.title }}</span>
             </el-menu-item>
@@ -81,21 +55,21 @@
                 <i :class="item.icon"></i>
                 <span>{{ item.title }}</span>
               </template>
-              <el-menu-item
-                v-for="item1 in item.children"
-                :index="item1.indexPath"
-              >
+              <el-menu-item v-for="item1 in item.children" :index="item1.indexPath">
                 <i :class="item1.icon"></i>
                 <span>{{ item1.title }}</span>
               </el-menu-item>
             </el-submenu>
-            
+
           </template>
         </el-menu>
       </el-aside>
       <el-container>
         <!-- 页面主体区域 -->
-        <el-main> Main.vue后台主页 </el-main>
+        <el-main>
+          <!-- 二级路由的挂载点 -->
+          <router-view></router-view>
+        </el-main>
         <!-- 底部 footer 区域 -->
         <el-footer>© www.itheima.com - 黑马程序员</el-footer>
       </el-container>
@@ -169,20 +143,24 @@ export default {
 <style lang="less" scoped>
 .main-container {
   height: 100%;
+
   .el-header,
   .el-aside {
     background: url("../../assets/images/夕阳余晖.png");
   }
+
   .el-header {
     padding: 0;
     display: flex;
     justify-content: space-between;
   }
+
   .el-main {
     overflow-y: scroll;
     height: 0;
     background-color: #f2f2f2;
   }
+
   .el-footer {
     background-color: #eee;
     font-size: 12px;
@@ -210,6 +188,7 @@ export default {
   border-top: 1px solid #000;
   border-bottom: 1px solid #000;
   user-select: none;
+
   img {
     width: 50px;
     height: 50px;
@@ -218,6 +197,7 @@ export default {
     margin-right: 15px;
     object-fit: cover;
   }
+
   span {
     color: white;
     font-size: 16px;
@@ -228,6 +208,7 @@ export default {
 .el-menu-item {
   font-size: 16px;
 }
+
 .el-aside {
   width: 16% !important;
 }

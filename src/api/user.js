@@ -3,9 +3,9 @@ import require from "@/utils/requaire";
 import store from '@/store'
 
 //这是获取用户资料的接口
-export const getUserinfo=()=>{
+export const getUserinfo = () => {
     return require({
-        url:'/my/userinfo',
+        url: '/my/userinfo',
         //传参够后台：params(查询字符串query),data(请求体body),header(请求头)
         //已经定义了请求拦截器，就不需要写了
         // headers:{
@@ -13,5 +13,20 @@ export const getUserinfo=()=>{
         //     //直接用引入的信息
         //     Authorization:store.state.token
         // }
+    })
+}
+
+//这是更新用户的api
+export const updateUserinfo = ({ id, username, nickname, email, user_pic }) => {
+    return require({
+        url: '/my/userinfo',
+        method: 'PUT',
+        data: {
+            id,
+            username,
+            nickname,
+            email,
+            user_pic
+        }
     })
 }
