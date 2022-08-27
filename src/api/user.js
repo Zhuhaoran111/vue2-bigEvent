@@ -1,6 +1,6 @@
 //引入自定义的require函数
 import require from "@/utils/requaire";
-import store from '@/store'
+// import store from '@/store'
 
 //这是获取用户资料的接口
 export const getUserinfo = () => {
@@ -27,6 +27,20 @@ export const updateUserinfo = ({ id, username, nickname, email, user_pic }) => {
             nickname,
             email,
             user_pic
+        }
+    })
+}
+/**
+ * 更新-用户头像
+ * @param {*} avatar 头像的base64字符串
+ * @returns Promise对象
+ */
+export const updateAvatarAPI = (avatar) => {
+    return require({
+        url: '/my/update/avatar',
+        method: 'PATCH',
+        data: {
+            avatar   //头像base64字符串
         }
     })
 }
