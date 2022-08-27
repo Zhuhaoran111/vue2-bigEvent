@@ -44,3 +44,20 @@ export const updateAvatarAPI = (avatar) => {
         }
     })
 }
+
+
+//更新用户密码的api
+//{ old_pwd, new_pwd, re_pwd }=this.pwdForm 进行结构赋值
+export const updatePwdAPI = ({ old_pwd, new_pwd, re_pwd }) => {
+    return require({
+        url: '/my/updatePwd',
+        method: 'PATCH',
+        data: {
+            old_pwd,
+            new_pwd,
+            re_pwd
+        }
+
+
+    })
+}
