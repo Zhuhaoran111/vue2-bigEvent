@@ -80,7 +80,7 @@ export default {
                     const { data: res } = await updatePwdAPI(this.pwdForm)
                     if (res.code != 0) return this.$message.error('原密码不正确')
                     this.$message.success('更新密码成功')
-                    this.$refs.pwdFormRef.resetFields()
+                    this.$refs.pwdFormRef.resetFields()  //清楚规则
                     this.$store.commit('updateToken', '')
                     this.$store.commit('updateUserinfo', {})
                     this.$router.push('/login')

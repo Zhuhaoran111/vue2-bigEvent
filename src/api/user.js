@@ -57,7 +57,5 @@ export const updatePwdAPI = ({ old_pwd, new_pwd, re_pwd }) => {
             new_pwd,
             re_pwd
         }
-
-
     })
 }

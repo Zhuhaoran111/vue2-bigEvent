@@ -26,6 +26,10 @@ const routes = [
       {
         path: 'user-pwd',
         component: () => import('@/views/user/userPwd.vue')
+      },
+      {
+        path: 'art-cate', // 文章分类
+        component: () => import('@/views/article/artCate.vue')
       }
     ]
   },
