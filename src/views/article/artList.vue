@@ -22,7 +22,7 @@
                         </el-select>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" size="small">筛选</el-button>
+                        <el-button type="primary" size="small">查询</el-button>
                         <el-button type="info" size="small">重置</el-button>
                     </el-form-item>
                 </el-form>
@@ -31,6 +31,18 @@
             </div>
 
             <!-- 文章表格区域 -->
+            <!-- 文章表格区域 -->
+            <el-table :data="articleList" style="width: 100%;" border stripe>
+                <el-table-column label="文章标题" prop="title"></el-table-column>
+                <el-table-column label="分类" prop="cate_name"></el-table-column>
+                <el-table-column label="发表时间" prop="pub_date">
+                    <template v-slot="scope">
+                        <span>{{ $formatDate(scope.row.pub_date) }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="状态" prop="state"></el-table-column>
+                <el-table-column label="操作"></el-table-column>
+            </el-table>
 
             <!-- 分页区域 -->
         </el-card>
@@ -73,7 +85,7 @@
 </template>
 
 <script>
-import { getArticleApi, uploadArticleApi } from '@/api/article.js'
+import { getArticleApi, uploadArticleApi, getArticleListAPI } from '@/api/article.js'
 import imgObj from '../../assets/images/cover.jpg'
 export default {
     name: 'ArtList',
@@ -82,8 +94,8 @@ export default {
             pubDialogVisible: false, // 控制发表文章对话框的显示与隐藏
             // 查询参数对象
             q: {
-                pagenum: 1,
-                pagesize: 2,
+                pagenum: 1,  //默认拿第一页的数据
+                pagesize: 10,//默认当前页需要几条数据,后台就返回几条数据
                 cate_id: '',
                 state: ''
             },
@@ -114,11 +126,15 @@ export default {
                 cover_img: [{ required: true, message: '请选择封面', trigger: 'blur' }]
             },
             //保存文章分类列表
-            cartList: []
+            cateList: [],
+            //保存文章列表的数据集
+            articleList: [],
+            total: 0,//文章的总数
         }
     },
     created() {
-        this.getCateListFn()
+        this.getCateListFn()   //文章分类数据
+        this.getAllArticleList()  //文章列表数据
     },
     methods: {
         //点击发布文章弹出对话框
@@ -146,6 +162,12 @@ export default {
                 this.cateList = res.data
                 console.log(this.cateList)
             }
+        },
+        //获取所有的文章列表
+        async getAllArticleList() {
+            const { data: res } = await getArticleListAPI(this.q)
+            this.articleList = res.data
+            this.total = res.total
         },
         //选择封面的点击事件
         chooseImgFn() {
@@ -200,6 +222,7 @@ export default {
                     // 关闭对话框
                     this.pubDialogVisible = false
                     // TODO：刷新文章列表数据
+                    this.getAllArticleList()
 
                 } else {
                     return false

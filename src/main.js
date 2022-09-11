@@ -14,6 +14,13 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
+// 导入dayjs方法
+import dayjs from 'dayjs'
+
+// 在原型对象上添加一个属性，属性里面封装成一个函数,上定义时间格式化函数
+Vue.prototype.$formatDate = (dateObj) => {
+  return dayjs(dateObj).format('YYYY-MM-DD HH:mm:ss')
+}
 // 全局注册富文本编辑器
 Vue.use(VueQuillEditor)
 //使用组件库
