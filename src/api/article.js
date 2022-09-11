@@ -42,3 +42,14 @@ export const deleteArticleApi = (id) => {
         }
     })
 }
+
+//发布文章的接口,POST请求
+export const uploadArticleApi = (fd) => {
+    return require({
+        url: '/my/article/add',
+        method: 'POST',
+        data: fd
+        //{}如果是一个普通对象，axiosh会把他转成JSON字符串在请求体里结合交给后台
+        //这个请求体文档要求请求体里面是一个FormData类型(表单数据对象)携带文件给后台
+    })
+}
