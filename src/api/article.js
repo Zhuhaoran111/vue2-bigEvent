@@ -70,3 +70,32 @@ export const getArticleListAPI = ({ pagenum, pagesize, cate_id, state }) => {
         }
     })
 }
+
+/**
+ * 获取-文章详情
+ * @param {*} id 文章id
+ * @returns Promise对象
+ */
+export const getArticleDetailApi = (id) => {
+    return require({
+        url: '/my/article/info',
+        params: {
+            id
+        }
+    })
+}
+
+/**
+ * 删除文章的详情
+ * @param {*} id 文章id
+ * @returns Promise对象
+ */
+export const delArticleDetailApi = (id) => {
+    return require({
+        url: '/my/article/info',
+        method: 'DELETE',
+        params: {
+            id
+        }
+    })
+}
