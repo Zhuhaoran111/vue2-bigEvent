@@ -15,7 +15,7 @@
         </el-form-item>
         <el-form-item prop="password">
           <el-input
-            placeholder="请输入密码"
+            placeholder="请输入密码哦"
             v-model="form.password"
             autocomplete="off"
           ></el-input>
