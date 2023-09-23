@@ -4,7 +4,7 @@
             <span>更换头像</span>
         </div>
         <div>
-            <!-- 图片，用来展示用户选择的头像 -->
+            <!-- 图片，用来展示用户选择的头像212 -->
             <!-- 没图片是默认方式，有图片是就是选择的图片 -->
             <img v-if="!avatar" class="the_img" src="../../assets/images/avatar.jpg" alt="" />
             <img v-else class="the_img" :src="avatar" alt="" />
