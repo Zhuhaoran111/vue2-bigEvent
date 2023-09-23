@@ -7,7 +7,7 @@
       <div class="title-box"></div>
       <!-- 登录的表单区域 -->
       <el-form :model="loginForm" :rules="loginRules" ref="loginRef">
-        <!-- 用户名 -->
+        <!-- 用户名 1 -->
         <el-form-item prop="username">
           <el-input v-model="loginForm.username" placeholder="请输入用户名"></el-input>
         </el-form-item>

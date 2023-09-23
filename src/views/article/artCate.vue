@@ -16,6 +16,7 @@
                     <template v-slot="scope">
                         <el-button type="primary" size="mini" @click="updateFn(scope.row)">编辑</el-button>
                         <el-button type="danger" size="mini" @click="deleteFn(scope.row.id)">删除</el-button>
+                        <el-button type="primary" size="mini" @click="add(scope.row.id)">新增</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -27,7 +28,7 @@
         before-close(关闭前的回调，可以在内部用，是否确认关闭)
         dialog内部关闭，esc按键,点击旁边的蒙层即空白处和点击叉号都是内部的调用
         -->
-        <el-dialog title="添加文章分类" :visible.sync="addVisible" width="35%" @closed="onAddClosedFn">
+        <el-dialog title="添加文章分类" :visible.sync="addVisible" width="800px" @closed="onAddClosedFn">
             <!-- 添加的表单 -->
             <el-form :model="addForm" :rules="addRules" ref="addRef" label-width="80px">
                 <el-form-item label="分类名称" prop="cate_name">
@@ -42,15 +43,63 @@
                 <el-button size="mini" type="primary" @click="confrimFn">保 存</el-button>
             </span>
         </el-dialog>
+
+
     </div>
 </template>
-
 <script>
 import { getArticleApi, saveArticleCateApi, updateArticelApi, deleteArticleApi } from '@/api/article.js'
 export default {
     name: 'ArtCate',
     data() {
+        let checkNameReg = (rule, value, callback) => {
+            const reg = /^[_a-zA-Z0-9]+$/;
+            if (value == '' || value == undefined || value == null) {
+                callback();
+            } else {
+                if (!reg.test(value)) {
+                    callback(new Error('仅由英文字母，数字以及下划线组成'));
+                } else {
+                    callback();
+                }
+            }
+        }
         return {
+            viewShow: 1,
+            viewFormData: {
+                viewName: '',
+                databaseName: '',
+                viewType: '',
+                viewDesc: '',
+                refreshMode: '',
+                hashColumns: '',
+                bucketsNum: '',
+                partitionExpression: '',
+                sortColumnNum: '',
+                timeout: '',
+                replicationNum: '',
+                storageMediaType: '',
+                selectSql: ''
+            },
+
+            rules: {
+                viewName: [
+                    { required: true, message: '请输入物化视图名称', trigger: 'blur' },
+                    { min: 1, max: 65, message: '长度不能超过64位', trigger: 'blur' },
+                    { validator: checkNameReg, trigger: 'blur' },
+                    { pattern: /^[A-z]/, message: '必须是字母开头', trigger: 'blur' }],
+                databaseName: [{ required: true, message: '请选择数据库名称', trigger: 'change' }],
+                viewType: [{ required: true, message: '请选择多表物化视图', trigger: 'change' }],
+                refreshMode: [{ required: true, message: '请选择刷新方式', trigger: 'change' }],
+                refreshInterval: [{ pattern: /^[1-9]+[0-9]*$/, message: '请填写正整数', trigger: 'blur' }],
+                bucketsNum: [{ pattern: /^[1-9]+[0-9]*$/, message: '请填写正整数', trigger: 'blur' }],
+                sortColumnNum: [{ pattern: /^[1-9]+[0-9]*$/, message: '请填写正整数', trigger: 'blur' }],
+                replicationNum: [{ pattern: /^[1-9]+[0-9]*$/, message: '请填写正整数', trigger: 'blur' }],
+            },
+
+            addwuhuaVisible: false,
+
+            //测试
             cateList: [],
             addVisible: false, // 添加分类-对话框是否显示,默认不显示
             addForm: { // 添加form表单的数据对象
@@ -75,6 +124,13 @@ export default {
         this.getArticleFn()
     },
     methods: {
+        //测试
+        add() {
+            this.addwuhuaVisible = true
+        },
+        onwuhuaAddClosedFn() {
+            this.addwuhuaVisible = false
+        },
         //获取文章分类列表
         async getArticleFn() {
             const res = await getArticleApi()

@@ -89,8 +89,7 @@
                     <img src="../../assets/images/cover.jpg" alt="" class="cover-img" ref="imgRef" />
                     <br />
                     <!-- 文件选择框，默认被隐藏 -->
-                    <input type="file" style="display: none;" accept="image/*" ref="iptFileRef"
-                        @change="changeCoverFn" />
+                    <input type="file" style="display: none;" accept="image/*" ref="iptFileRef" @change="changeCoverFn" />
                     <!-- 选择封面的按钮 -->
                     <el-button type="text" @click="chooseImgFn">+ 选择封面</el-button>
                 </el-form-item>
@@ -115,8 +114,7 @@
             <el-divider></el-divider>
 
             <!-- 文章的封面 -->
-            <img v-if="artDetail.cover_img" :src="'http://big-event-vue-api-t.itheima.net' + artDetail.cover_img"
-                alt="" />
+            <img v-if="artDetail.cover_img" :src="'http://big-event-vue-api-t.itheima.net' + artDetail.cover_img" alt="" />
 
             <!-- 文章的详情 ,content是带标签的，想要去掉标签就要加v-html去掉标签-->
             <div v-html="artDetail.content" class="detail-box"></div>
